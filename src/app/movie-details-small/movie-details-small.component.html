@@ -1,0 +1,17 @@
+<div *ngIf="movie">
+	<h3>
+		{{ movie.title }}
+	</h3>
+	<div>	
+		<img class="poster" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/{{movie.poster_path}}">
+	</div>
+	<div>
+		<br>
+		{{ movie.overview }}
+	</div>
+	<br>
+	<button (click)="gotoMovies(movie)">Details</button>
+	 <!-- <a routerLink="/movie-details" routerLinkActive="active">Details</a> -->
+</div>
+
+	

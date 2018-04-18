@@ -1,0 +1,35 @@
+<div class="col-sm-4">
+	<section class="menu">
+		<div class="movie-list">
+			<div class="movie-group">
+				<h2>{{ moviesHeader }}</h2>
+				<br>
+				<ul class="movies">
+					<li *ngFor="let movie of movies" [class.selected]="movie === selectedMovie" (click)="onSelect(movie)">
+						<span>{{movie.title}}</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+</div>
+
+<!--
+<div>
+	<ul>
+		<li *ngFor="let movie of movies">
+			{{ movie.title }}
+		</li>
+	</ul>
+</div>
+-->
+
+<!--
+<div>
+	<ul>
+		<li *ngFor="let driver of drivers">
+			{{ driver.familyName }}, {{ driver.givenName }}
+		</li>
+	</ul>
+</div>
+-->
