@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Imovie } from '../imovie';
 import { HttpService } from '../http.service';
+import { element } from 'protractor';
+import { forEach } from '@angular/router/src/utils/collection';
 
 
 @Component({
 	selector: 'app-movie-details',
 	templateUrl: './movie-details.component.html',
-	styleUrls: ['./movie-details.component.css']
+	styleUrls: ['./movie-details.component.css'],
+	providers: [HttpService]
 })
 export class MovieDetailsComponent implements OnInit {
 
@@ -18,11 +21,18 @@ export class MovieDetailsComponent implements OnInit {
 	constructor(httpService: HttpService,
 		private route: ActivatedRoute,
 		private router: Router) 
-		{ 
-			httpService.getPopularMovies().subscribe(response => this.movies = response);
+		{
+//			httpService.getPopularMovies().subscribe(response => this.movies = response);
 			this.MovieTitle = this.route.snapshot.params['title'];
-			// this.movie = this.movies.find(x => x.title == this.MovieTitle);
-			this.movie = this.movies.find(x => x.title === this.MovieTitle);
+
+			for(let x of this.movies)
+			{
+				if (this.MovieTitle === x.title) 
+				{
+					this.movie = x;						
+				}
+			}
+
 		}
 
 	ngOnInit() {

@@ -28,7 +28,7 @@ export class MoviesComponent implements OnInit {
 	}
 	
 	public onSelect(movie: Imovie) {
-		this.router.navigate(['/movie-details', movie.title]);
+		this.router.navigate(['/movie-details/', movie.title]);
 	}
 /*
 public gotoMovies(movie : Imovie){
