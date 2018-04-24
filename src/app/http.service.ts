@@ -5,6 +5,9 @@ import { Imovie } from './imovie';
 import 'rxjs/add/operator/map';
 import { MoviesComponent } from './movies/movies.component';
 
+
+interface IMovieData {results : Imovie[];}
+
 @Injectable()
 export class HttpService 
 {
@@ -49,4 +52,32 @@ export class HttpService
 		return this.upcommingMovies$;
 	}
 
+	public getMovie(title : string) : Observable<Imovie[]> 
+	{
+		return this.http.get("http://api.themoviedb.org/3/search/movie?query=" + title + "&api_key=" +  this.ApiKey)
+		.map(response => 
+		{
+		  const data : IMovieData = response.json();
+		  return data.results.filter(movie => movie.poster_path !== null).map(movie => 
+			{return <Imovie>
+				{
+					'vote_count' : movie.vote_count,
+					'id' : movie.id,
+					'video' : movie.video,
+					'vote_average' : movie.vote_average,
+					'title' : movie.title,
+					'popularity' : movie.popularity,
+					'poster_path' : "https://image.tmdb.org/t/p/w185_and_h278_bestv2"+movie.poster_path, 
+					'original_language' : movie.original_language,
+					'original_title' : movie.original_title,
+					'genre_ids' : movie.genre_ids,
+					'backdrop_path' : movie.backdrop_path,
+					'adult' : movie.adult,
+					'overview' : movie.overview,
+					'release_date' : movie.release_date 
+				}
+			})
+
+		})
+	}
 }

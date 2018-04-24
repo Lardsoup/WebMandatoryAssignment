@@ -4,6 +4,7 @@ import { Imovie } from '../imovie';
 import { HttpService } from '../http.service';
 import { element } from 'protractor';
 import { forEach } from '@angular/router/src/utils/collection';
+import { Alert } from 'selenium-webdriver';
 
 
 @Component({
@@ -16,15 +17,19 @@ export class MovieDetailsComponent implements OnInit {
 
 	private movies : Imovie[];
 	private movie : Imovie;
-	private MovieTitle : String;
+	private MovieTitle : string;
 
 	constructor(httpService: HttpService,
 		private route: ActivatedRoute,
 		private router: Router) 
 		{
-//			httpService.getPopularMovies().subscribe(response => this.movies = response);
+			//httpService.getPopularMovies().subscribe(response => this.movies = response);
 			this.MovieTitle = this.route.snapshot.params['title'];
 
+			httpService.getMovie(this.MovieTitle).subscribe(response => this.movies = response);
+			//this.movie = alert(this.movies[0])
+//			this.movie = this.movies.find(x => x.title == this.MovieTitle);			
+/*
 			for(let x of this.movies)
 			{
 				if (this.MovieTitle === x.title) 
@@ -32,7 +37,7 @@ export class MovieDetailsComponent implements OnInit {
 					this.movie = x;						
 				}
 			}
-
+*/
 		}
 
 	ngOnInit() {

@@ -1,8 +1,24 @@
-<p>
-
-</p>
-<li *ngFor="let movie of movies" [class.selected]="movie === selectedMovie" (click)="onSelect(movie)">
-	<div ng-if="movie.title == MovieTitle">
-		{{ movie.title }}
+<div class="col-sm-1"></div>
+<h3>
+	<li>{{ movies[0].title }}</li>
+</h3>
+<div class="col-sm-8">
+	<div *ngIf="movies"> 
+		<p>
+			Overview:
+			<br> {{ movies[0].overview }}
+		</p>
+		<br>
+		<p>
+			Released :
+			<br> {{ movies[0].release_date }}
+		</p>
 	</div>
-</li>
+</div>
+
+
+<!--
+<div>	
+	<img class="poster" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/{{movies[0].poster_path}}">
+</div>
+-->
